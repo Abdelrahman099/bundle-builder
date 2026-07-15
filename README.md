@@ -3,7 +3,8 @@
 A pixel-faithful rebuild...
 
 ## Live Demo
-https://...
+https://bundle-builder-five-navy.vercel.app/
+
 
 ## Getting Started
 
@@ -34,5 +35,4 @@ npm run build
 - Persistent state
 ...
 
-#Live Demo
-https://bundle-builder-five-navy.vercel.app/
+
