@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/*
+  Tokens sampled directly from the Figma frame exports via pixel sampling
+  for accuracy rather than eyeballing.
+*/
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #f2effc;
+  --color-brand-100: #e9e5fa;
+  --color-brand-300: #a697e8;
+  --color-brand-400: #846ee0;
+  --color-brand-500: #4e2fd2;
+  --color-brand-600: #4326b8;
+  --color-brand-700: #371f99;
+
+  --color-lavender: #edf4ff;
+  --color-lavender-50: #f6f9ff;
+
+  --color-ink: #0b0d10;
+  --color-body: #575757;
+  --color-muted: #6b7280;
+  --color-subtle: #9aa0a6;
+
+  --color-danger: #d8392b;
+  --color-success: #0aa288;
+
+  --color-stepper-bg: #e6ebf0;
+  --color-border-subtle: #e5e7eb;
+
+  --radius-card: 1rem;
+  --radius-panel: 1.25rem;
+  --radius-chip: 0.5rem;
+  --radius-stepper: 0.5rem;
+
+  --shadow-card: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+
+  /*
+    Responsive scale — every screen gets a category. One unit (rem) across the
+    whole scale: Tailwind v4 can only sort media-query variants correctly when
+    breakpoints share a unit (mixing px + rem broke lg/xxl ordering before).
+
+      xs   30rem  480px   large phones
+      sm   40rem  640px   phablets / small tablets
+      md   48rem  768px   tablets (portrait)
+      lg   64rem  1024px  laptops — sidebar layout (Frame 1735) starts
+      xl   80rem  1280px  desktops
+      xxl  90rem  1440px  large desktops — review drops below (Frame 1736)
+  */
+  --breakpoint-*: initial;
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 68rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-xxl: 90rem;
+}
+
+html {
+  font-family: var(--font-sans);
+  /*
+    Fluid root size: everything authored in rem (type, spacing, radii, images)
+    scales with the viewport. ~14px on phones → 16px at the 1440px Figma
+    reference (keeps the pixel-perfect target exact) → 17px cap on huge screens.
+    Media-query breakpoints are unaffected (they resolve against the browser
+    default, not this value).
+  */
+  font-size: clamp(0.875rem, 0.79rem + 0.24vw, 1.0625rem);
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--color-ink);
+}
+
+/* Utility: visually-hidden but accessible */
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Radix Accordion open/close height animation */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-accordion-up {
+  animation: accordion-up 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
